@@ -2,6 +2,7 @@
 #include "common.h"
 #include "debug.h"
 #include "vm.h"
+#include "compiler.h"
 
 VM vm;
 
@@ -92,11 +93,13 @@ static InterpretResult run()
 #undef READ_BYTE
 }
 
-InterpretResult interpret(Chunk* chunk)
+InterpretResult interpret(const char* source)
 {
-    vm.chunk = chunk;
-    vm.ip = vm.chunk->code;
-    return run();
+    // vm.chunk = chunk;
+    // vm.ip = vm.chunk->code;
+    // return run();
+    compile(source);
+    return INTERPRET_OK;
 }
 
 void push(Value value)
